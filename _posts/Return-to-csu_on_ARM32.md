@@ -170,8 +170,6 @@ Fig 12 - Second phase of exploit
 
 The complete exploit will look something like this.
 
-:::: {.blackbox data-latex=""}
-::: {.center data-latex=""}
 _#!/usr/bin/env python3_
 
 _from pwn import \*_
@@ -303,7 +301,6 @@ _p.sendline(payload2)_
 _p.recv()_
 
 _p.interactive()_
-::::
 
 ### **Running Exploit**
 
