@@ -27,6 +27,19 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
 
+title: Return-to-csu on ARM32
+description: 
+author:
+  name: Xetrapwn
+  email: [Your email address]
+  url: "https://xetrapwn.github.io"
+
+baseurl: "https://xetrapwn.github.io/return-to-csu_on_ARM32"
+
+paginate: 3
+owner: [Your name]
+year: [Current Year]
+
 # Custom variables
 owner : "Xetrapwn"
 year : "2021"
