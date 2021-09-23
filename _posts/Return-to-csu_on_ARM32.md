@@ -10,24 +10,24 @@ To set up an environment for exploitation, we have used a ready made virtual mac
 After downloading, the password for extracting the downloaded zip file is &quot;azerialabs&quot;. When the files will be extracted, you can open the virtual machine instance in vmware player [6] which is free or vmware workstation pro which is paid. We are using vmware workstation pro for running this virtual machine instance. After starting the instance, you will see the following screen in front of you.
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure01.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure01.png">
+<br>
 Fig 1 - ARM Lab VM 2.0
 </p>
 
 In the fig 1, you can see the blue arm processor icon on the left of the screen. After clicking on it, the ARMv7 Qemu instance will start. After the booting process, the machine will ask for username and password which is &quot;user&quot; and &quot;user&quot; respectively. The logged in screen is shown in fig 2. 
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure02.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure02.png">
+<br>
 Fig 2 - ARMv7 Qemu instance
 </p>
 
 For the smooth exploitation and debugging process, we have used a terminator terminal emulator which gives us the features of screen division using keyboard shortcut keys and many other tweeks [7]. 
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure03.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure03.png">
+<br>
 Fig 3 - ssh connection of ARM instance to use on terminator terminal emulator
 </p>
 
@@ -59,8 +59,8 @@ The ASLR is another exploit mitigation technique which randomizes the stack, hea
 The vulnerable code which we will be using is shown in Fig 4. We will compile it using -fno-stack-protector and --no-pie flags so that mitigations of PIE and canary will not be present in the binary. We will also put 2 in randomize\_va\_space file to enable ASLR.
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure04.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure04.png">
+<br>
 Fig 4 - Vulnerable code
 </p>
 
@@ -71,8 +71,8 @@ Now let&#39;s start writing exploit. The technique which we are going to use is 
 There are two ROP gadgets that will be used in our exploit payload. These gadgets are shown in the following disassembly of \_\_libc\_csu\_init.
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure05.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure05.png">
+<br>
 Fig 5 - disassembly of \_\_libc\_csu\_init
 </p>
 
@@ -81,8 +81,8 @@ The first gadget is at the address 0x0001049e and the second gadget is starting 
 Our exploit will be divided into two phases. The first phase will leak the address of write@GOT by calling write@plt. And the second phase will call the system by using the offsetting with leaked write address.
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure06.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure06.png">
+<br>
 Fig 6 - ROP chains
 </p>
 
@@ -101,8 +101,8 @@ For creation of the first payload, let&#39;s first find the address of both gadg
 Now to find the address of write@plt, we can disassemble the main function and note the address as shown in fig 7.
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure07.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure07.png">
+<br>
 Fig 7 - Disassembly of main function
 </p>
 
@@ -111,8 +111,8 @@ Fig 7 - Disassembly of main function
 Now to find the address of write@got, we can use the gef command $got which prints out the function names and their addresses from the global offset table. In fig 8, we can see the address 0x2101c where the write@GLIBC address will be written. 
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure08.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure08.png">
+<br>
 Fig 8 - to find the address of write@got
 </p>
 
@@ -125,16 +125,16 @@ Now only the address of the main function is left to complete our payload, which
 All the addresses we need for the payload one are successfully found. Following is the first phase of our exploit. 
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure09.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure09.png">
+<br>
 Fig 9 - First phase of exploit
 </p>
 
 After running the first phase, we have successfully got our leak. Now the next step is to find the actual addresses of the system and /bin/sh by using this leak. To do this first we need to find the addresses of write@GLIBC and system@GLIBC as done in fig 10 so that we can find the difference between them. This difference will give us the offset of the system from the write function. 
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure10.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure10.png">
+<br>
 Fig 10 - base addresses of system and write functions
 </p>
 
@@ -143,8 +143,8 @@ Fig 10 - base addresses of system and write functions
 The same is done for /bin/sh. Both addresses of /bin/sh and write are printed as shown in fig 11 and then their difference gives us the offset. 
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure11.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure11.png">
+<br>
 Fig 11 - base addresses of /bin/sh and write functions
 </p>
 
@@ -161,8 +161,8 @@ The system offset is subtracted because the system function was above the write 
 All the addresses we need for the payload two are successfully found. Following is the second phase of our exploit.
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure12.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure12.png">
+<br>
 Fig 12 - Second phase of exploit
 </p>
 
@@ -307,8 +307,8 @@ _p.interactive()_
 After running this exploit, we got the shell! 
 
 <p align="center">
-![](https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure13.png)
-
+<img src="https://github.com/xetrapwn/xetrapwn.github.io/blob/master/images/return-to-csu_on_ARM32/figure13.png">
+<br>
 Fig 13 - Running exploit
 </p>
 
