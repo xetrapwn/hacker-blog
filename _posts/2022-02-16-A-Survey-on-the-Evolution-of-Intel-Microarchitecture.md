@@ -1,4 +1,3 @@
-# **A survey on the Evolution of Intel Microarchitecture**
 
 Before starting our journey of exploring Intel microarchitectures, let&#39;s talk about what microarchitecture actually means.
 
