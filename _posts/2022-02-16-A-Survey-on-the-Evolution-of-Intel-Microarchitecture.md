@@ -18,7 +18,7 @@ Intel&#39;s journey of microprocessors was started in 1971 with its first commer
 - Intel Core
 - Intel Core 2
 
-**Intel 4004: 1971**
+## Intel 4004: 1971
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/xetrasec/xetrasec.github.io/master/images/Survey_on_Intel_microarchitecture/image12.jpg">
