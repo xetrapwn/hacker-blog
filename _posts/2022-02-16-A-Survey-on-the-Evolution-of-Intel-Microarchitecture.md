@@ -350,7 +350,7 @@ Along with this generation classification, after Intel Core 2, Intel introduced 
 
 ## References
 
-1. P. 02 J. 2018 | 14:00 GMT, &quot;Chip Hall of Fame: Intel 4004 Microprocessor - IEEE Spectrum,&quot; _IEEE Spectrum: Technology, Engineering, and Science News_.[https://spectrum.ieee.org/tech-history/silicon-revolution/chip-hall-of-fame-intel-4004-microprocessor](https://spectrum.ieee.org/tech-history/silicon-revolution/chip-hall-of-fame-intel-4004-microprocessor) (accessed Oct. 15, 2020).
+1. P. 02 J. 2018 | 14:00 GMT, “Chip Hall of Fame: Intel 4004 Microprocessor - IEEE Spectrum,” IEEE Spectrum: Technology, Engineering, and Science News. https://spectrum.ieee.org/tech-history/silicon-revolution/chip-hall-of-fame-intel-4004-microprocessor (accessed Oct. 15, 2020).
 
 1. &quot;CPU History - The CPU Museum - Life Cycle of the CPU.&quot;[http://www.cpushack.com/life-cycle-of-cpu.html](http://www.cpushack.com/life-cycle-of-cpu.html) (accessed Oct. 15, 2020).
 
