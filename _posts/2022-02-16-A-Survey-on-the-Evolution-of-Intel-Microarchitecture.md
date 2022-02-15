@@ -48,7 +48,7 @@ Figure 1.Thomas Nguyen, A processor Intel C4004 with grey traces, 2016, https://
 - Contained **16 registers** of 4-bit each.
 - **Busicom calculator 141-PF** was the first commercial product, which used this microprocessor.
 
-**Intel 4040: 1974**
+## Intel 4040: 1974
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/xetrasec/xetrasec.github.io/master/images/Survey_on_Intel_microarchitecture/image1.jpg">
@@ -76,7 +76,7 @@ Figure 2.Thomas Nguyen, Procesoro Intel C4040, 2016, https://commons.wikimedia.o
 - Had **24 registers** , with the expansion of 8 new registers in the 4-bit wide general-purpose index register set. These new registers were used in interrupt processing and bank switching.
 - The Intel 4040 was used in a large number of early video games and gaming machines such as the Bailey shuffleboard **[6]**.
 
-**Intel 8008: 1972**
+## Intel 8008: 1972
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/xetrasec/xetrasec.github.io/master/images/Survey_on_Intel_microarchitecture/image25.jpg">
@@ -106,7 +106,7 @@ Figure 3. Konstantin Lanzet, CPU Intel C8008-1, 2009, https://commons.wikimedia.
 - Contained **7 registers** of 8-bit each.
 - Intel 8008 was used in Dumb terminals, general calculators, bottling machines, data/character manipulation **[11]**.
 
-**Intel 8080: 1974**
+## Intel 8080: 1974
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/xetrasec/xetrasec.github.io/master/images/Survey_on_Intel_microarchitecture/image7.jpg">
@@ -137,7 +137,7 @@ Figure 4. Konstantin Lanzet, CPU Intel i8080, 2009, https://commons.wikimedia.or
 - Contained **seven 8-bit main registers** (six of which could be combined into three 16-bit registers) with a **16-bit stack pointer (SP)** and **16-bit program counter (PC)**.
 - The Intel 8080 was typically used in Traffic light controller, Altair computer (first PC) and many early microcomputers **[11]**.
 
-**Intel 8086: 1978**
+## Intel 8086: 1978
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/xetrasec/xetrasec.github.io/master/images/Survey_on_Intel_microarchitecture/image14.jpg">
@@ -194,7 +194,7 @@ Figure 7: Reading bytes and words at even and odd addresses. Adapted from [19]
 
 - The 8086 was used in the first Compaq Deskpro (a business-oriented personal computer manufactured by Compaq), AT&amp;T 6300 PC, IBM PS/2 models 25 and 30, and other portable computers.
 
-**Intel 80286: 1982**
+## Intel 80286: 1982
 
 - Intel 80286 was launched in **1982**.
 - Its **predecessors** were 8086, 8088 and 80186.
@@ -261,7 +261,7 @@ Figure 12: 80286 Four-level Hierarchical Privileged System.
 Source: Adapted from [21]
 </p>
 
-**Intel 80386: 1985**
+## Intel 80386: 1985
 
 - 80386 is the **first 32-bit processor** of the x86 family.
 - It was launched in October, 1985.
@@ -298,10 +298,10 @@ Source: Adapted from [21]
   - **Virtual 8086 Mode** - Virtual 8086 mode (also called V86 mode) is a dynamic mode in the sense that the processor can switch repeatedly and rapidly between V86 mode and protected mode. The CPU enters V86 mode from protected mode to execute an 8086 program, then leaves V86 mode and enters protected mode to continue executing a native 80386 program.
 - 80386 was first used by Compaq in the Deskpro 386. It was used in desktop computing.
 
-**Intel P5: 1993** 
+## Intel P5: 1993
 - Original Pentium microprocessors, first x86 processor with super-scalar architecture and branch prediction.
 
-**Intel P6: 1995**
+## Intel P6: 1995
 
 - P6 microarchitecture is the **sixth-generation Intel x86 microarchitecture** , which was introduced in 1995.
 - It was first implemented by **Pentium pro** microprocessor.
@@ -320,7 +320,7 @@ Source: Adapted from [21]
   - **Register Renaming** - It is used to avoid unnecessary serialized execution of program instructions because of use of the same registers.
 - It introduced **SSE (Streaming SIMD Extension)** Single Instruction Multiple Data (SIMD) instruction set extension, which contains instructions used to work with **single precious floating point** data. Its typical applications are digital signal processing and graphics processing.
 
-**Intel Core: 2006**
+## Intel Core: 2006
 
 - After NetBurst, Intel started a new family of processors called **Intel Core**. The processors within this family have been, for the most part, **broadly similar**.
 - Intel launched its original Core brand in **January, 2006** with the release of 32-bit **Yonah CPU** - Intel&#39;s first dual core mobile processor.
@@ -331,7 +331,7 @@ Source: Adapted from [21]
 - **Intel Core Solo** - It was released in January, 2006 and had a manufacturing process of 65 nm. It uses the same two-core die as the Core Duo, but has only one active core. It had a 2 MB L2 Cache.
 - **Intel Core Duo** - It was released in January, 2006 and had a manufacturing process of 65 nm, same as Core Solo. It has two cores on one die and a 2 MB shared cache by both cores.
 
-**Intel Core 2: 2007**
+## Intel Core 2: 2007
 
 - Intel Core 2 is a **64-bit processor** , supporting **Intel 64 ISA**.
 - It is a successor of Intel Core.
@@ -348,7 +348,7 @@ After Intel Core 2, Intel introduced the **generations of its Core processors** 
 
 Along with this generation classification, after Intel Core 2, Intel introduced **three variants with every microprocessor** : **Core i3** (low level performance), **Core i5** (mid range performance) and **Core i7** (high-end performance). Intel also introduced the new naming scheme for its Core processors leaving the names corresponding to specific technical features like the number of cores.
 
-**References**
+## References
 
 1. P. 02 J. 2018 | 14:00 GMT, &quot;Chip Hall of Fame: Intel 4004 Microprocessor - IEEE Spectrum,&quot; _IEEE Spectrum: Technology, Engineering, and Science News_.[https://spectrum.ieee.org/tech-history/silicon-revolution/chip-hall-of-fame-intel-4004-microprocessor](https://spectrum.ieee.org/tech-history/silicon-revolution/chip-hall-of-fame-intel-4004-microprocessor) (accessed Oct. 15, 2020).
 
